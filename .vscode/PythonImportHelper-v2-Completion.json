@@ -1,0 +1,470 @@
+[
+    {
+        "label": "boto3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "boto3",
+        "description": "boto3",
+        "detail": "boto3",
+        "documentation": {}
+    },
+    {
+        "label": "create_api",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def create_api(name, description, version, types):\n    response = client.create_rest_api(\n        name=name,\n        description=description,\n        version=version,\n        endpointConfiguration={'types': [types]}\n    )\n    return response['id']\ndef create_resource(apiId, parentId, pathPart):\n    response = client.create_resource(",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "create_resource",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def create_resource(apiId, parentId, pathPart):\n    response = client.create_resource(\n        restApiId=apiId,\n        parentId=parentId,\n        pathPart=pathPart\n    )\n    return response['id']\ndef get_parent_id(apiId, parent_resource_path):\n    response = client.get_resources(\n        restApiId=apiId,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "get_parent_id",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def get_parent_id(apiId, parent_resource_path):\n    response = client.get_resources(\n        restApiId=apiId,\n        limit=500  # Adjust the limit as needed to list all resources\n    )\n    parent_resource_id = ''\n    # Iterate through the resources to find the parent resource\n    for resource in response['items']:\n        if resource['path'] == parent_resource_path:\n            parent_resource_id = resource['id']",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "putMethod",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def putMethod(apiId, authorizationType, resourceId, httpMethod):\n    client.put_method(\n        restApiId=apiId,\n        authorizationType=authorizationType,\n        resourceId=resourceId,\n        httpMethod=httpMethod,\n    )\ndef putIntegration(apiId, httpMethod, resourceId, type, integrationHttpMethod, url):\n    client.put_integration(\n        restApiId=apiId,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "putIntegration",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def putIntegration(apiId, httpMethod, resourceId, type, integrationHttpMethod, url):\n    client.put_integration(\n        restApiId=apiId,\n        resourceId=resourceId,\n        httpMethod=httpMethod,\n        type=type,\n        integrationHttpMethod=integrationHttpMethod,\n        uri=url\n    )\ndef put_method_response(apiId, resourceId, httpMethod, statusCode, contentType, Model):",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "put_method_response",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def put_method_response(apiId, resourceId, httpMethod, statusCode, contentType, Model):\n    client.put_method_response(\n        restApiId=apiId,\n        resourceId=resourceId,\n        httpMethod=httpMethod,\n        statusCode=statusCode,\n        responseModels={\n            contentType: Model,\n        }\n    )",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "put_integration_response",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def put_integration_response(apiId, resourceId, httpMethod, statusCode):\n    client.put_integration_response(\n        restApiId=apiId,\n        resourceId=resourceId,\n        httpMethod=httpMethod,\n        statusCode=statusCode,\n    )\ndef create_deployement(apiId, stageName):\n    client.create_deployment(\n        restApiId=apiId,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "create_deployement",
+        "kind": 2,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "def create_deployement(apiId, stageName):\n    client.create_deployment(\n        restApiId=apiId,\n        stageName=stageName,\n    )\n    print(\"Stage Deployed successfully...\")\n###########################################################\nname = 'portfolio'\ndescription = 'Gateway for microservies in portfolio'\nversion = 'v-1'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "client = boto3.client('apigateway')\ndef create_api(name, description, version, types):\n    response = client.create_rest_api(\n        name=name,\n        description=description,\n        version=version,\n        endpointConfiguration={'types': [types]}\n    )\n    return response['id']\ndef create_resource(apiId, parentId, pathPart):",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "name",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "name = 'portfolio'\ndescription = 'Gateway for microservies in portfolio'\nversion = 'v-1'\nendpointConfigurationType = 'EDGE'\nauthorizationType = 'NONE'\nhttpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "description = 'Gateway for microservies in portfolio'\nversion = 'v-1'\nendpointConfigurationType = 'EDGE'\nauthorizationType = 'NONE'\nhttpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "version",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "version = 'v-1'\nendpointConfigurationType = 'EDGE'\nauthorizationType = 'NONE'\nhttpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "endpointConfigurationType",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "endpointConfigurationType = 'EDGE'\nauthorizationType = 'NONE'\nhttpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "authorizationType",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "authorizationType = 'NONE'\nhttpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod = 'GET'\nintegrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod = \"GET\"\ntype = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "type",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "type = 'HTTP'\nstatusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "statusCode",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "statusCode = '200'\ncontentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "contentType",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "contentType = 'application/json'\nModel = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "Model = 'Empty'\nstageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources\nprint(\"started creating Api Gateway...\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "stageName",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "stageName = 'dev'\nservice1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources\nprint(\"started creating Api Gateway...\")\napiId = create_api(name, description, version, endpointConfigurationType)",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "service1",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "service1 = 'http://ec2-65-0-133-40.ap-south-1.compute.amazonaws.com/'\nservice2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources\nprint(\"started creating Api Gateway...\")\napiId = create_api(name, description, version, endpointConfigurationType)\nroot = get_parent_id(apiId, '/')",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "service2",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "service2 = 'http://ec2-13-127-254-77.ap-south-1.compute.amazonaws.com/'\nservice3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources\nprint(\"started creating Api Gateway...\")\napiId = create_api(name, description, version, endpointConfigurationType)\nroot = get_parent_id(apiId, '/')\n# Resource for /submit POST",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "service3",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "service3 = 'http://ec2-65-1-148-153.ap-south-1.compute.amazonaws.com/'\n# ***************************************************************\n# ***************************************************************\nprint(\"started creating Api Gateway...\")\n# Define your API Gateway and resources\nprint(\"started creating Api Gateway...\")\napiId = create_api(name, description, version, endpointConfigurationType)\nroot = get_parent_id(apiId, '/')\n# Resource for /submit POST\n# resourceId_submit = get_parent_id(apiId, '/')",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "apiId",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "apiId = create_api(name, description, version, endpointConfigurationType)\nroot = get_parent_id(apiId, '/')\n# Resource for /submit POST\n# resourceId_submit = get_parent_id(apiId, '/')\nresourceId_submit = create_resource(apiId, root, \"submit\")\nhttpMethod_submit = 'POST'\nintegrationHttpMethod_submit = 'POST'\nuser_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "root = get_parent_id(apiId, '/')\n# Resource for /submit POST\n# resourceId_submit = get_parent_id(apiId, '/')\nresourceId_submit = create_resource(apiId, root, \"submit\")\nhttpMethod_submit = 'POST'\nintegrationHttpMethod_submit = 'POST'\nuser_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,\n               type, integrationHttpMethod_submit, user_post_url)",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_submit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_submit = create_resource(apiId, root, \"submit\")\nhttpMethod_submit = 'POST'\nintegrationHttpMethod_submit = 'POST'\nuser_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,\n               type, integrationHttpMethod_submit, user_post_url)\nput_method_response(apiId, resourceId_submit,\n                    httpMethod_submit, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submit,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_submit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_submit = 'POST'\nintegrationHttpMethod_submit = 'POST'\nuser_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,\n               type, integrationHttpMethod_submit, user_post_url)\nput_method_response(apiId, resourceId_submit,\n                    httpMethod_submit, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submit,\n                         httpMethod_submit, statusCode)",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_submit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_submit = 'POST'\nuser_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,\n               type, integrationHttpMethod_submit, user_post_url)\nput_method_response(apiId, resourceId_submit,\n                    httpMethod_submit, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submit,\n                         httpMethod_submit, statusCode)\n# Resource for /submissions GET",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "user_post_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "user_post_url = service1 + 'submit'\nputMethod(apiId, authorizationType, resourceId_submit, httpMethod_submit)\nputIntegration(apiId, httpMethod_submit, resourceId_submit,\n               type, integrationHttpMethod_submit, user_post_url)\nput_method_response(apiId, resourceId_submit,\n                    httpMethod_submit, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submit,\n                         httpMethod_submit, statusCode)\n# Resource for /submissions GET\nresourceId_submissions = create_resource(apiId, root, \"submissions\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_submissions",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_submissions = create_resource(apiId, root, \"submissions\")\nhttpMethod_submissions = 'GET'\nintegrationHttpMethod_submissions = 'GET'\nsubmissions_url = service1 + 'submissions'\nputMethod(apiId, authorizationType,resourceId_submissions, httpMethod_submissions)\nputIntegration(apiId, httpMethod_submissions, resourceId_submissions,type, integrationHttpMethod_submissions, submissions_url)\nput_method_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode)\n# # Resource for /deletesubmission DELETE\n# resourceId_deletesubmission = create_resource(",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_submissions",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_submissions = 'GET'\nintegrationHttpMethod_submissions = 'GET'\nsubmissions_url = service1 + 'submissions'\nputMethod(apiId, authorizationType,resourceId_submissions, httpMethod_submissions)\nputIntegration(apiId, httpMethod_submissions, resourceId_submissions,type, integrationHttpMethod_submissions, submissions_url)\nput_method_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode)\n# # Resource for /deletesubmission DELETE\n# resourceId_deletesubmission = create_resource(\n#     apiId, root, \"deletesubmission\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_submissions",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_submissions = 'GET'\nsubmissions_url = service1 + 'submissions'\nputMethod(apiId, authorizationType,resourceId_submissions, httpMethod_submissions)\nputIntegration(apiId, httpMethod_submissions, resourceId_submissions,type, integrationHttpMethod_submissions, submissions_url)\nput_method_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode)\n# # Resource for /deletesubmission DELETE\n# resourceId_deletesubmission = create_resource(\n#     apiId, root, \"deletesubmission\")\n# httpMethod_deletesubmission = 'DELETE'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "submissions_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "submissions_url = service1 + 'submissions'\nputMethod(apiId, authorizationType,resourceId_submissions, httpMethod_submissions)\nputIntegration(apiId, httpMethod_submissions, resourceId_submissions,type, integrationHttpMethod_submissions, submissions_url)\nput_method_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode, contentType, Model)\nput_integration_response(apiId, resourceId_submissions,httpMethod_submissions, statusCode)\n# # Resource for /deletesubmission DELETE\n# resourceId_deletesubmission = create_resource(\n#     apiId, root, \"deletesubmission\")\n# httpMethod_deletesubmission = 'DELETE'\n# integrationHttpMethod_deletesubmission = 'DELETE'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_rate",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_rate = create_resource(apiId, root, \"rate\")\nhttpMethod_rate = 'POST'\nintegrationHttpMethod_rate = 'POST'\nrate_url = service2 + 'rate'\n# # Resource for /getrating GET\nresourceId_getrating = create_resource(apiId, root, \"getrating\")\nhttpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_rate",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_rate = 'POST'\nintegrationHttpMethod_rate = 'POST'\nrate_url = service2 + 'rate'\n# # Resource for /getrating GET\nresourceId_getrating = create_resource(apiId, root, \"getrating\")\nhttpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_rate",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_rate = 'POST'\nrate_url = service2 + 'rate'\n# # Resource for /getrating GET\nresourceId_getrating = create_resource(apiId, root, \"getrating\")\nhttpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "rate_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "rate_url = service2 + 'rate'\n# # Resource for /getrating GET\nresourceId_getrating = create_resource(apiId, root, \"getrating\")\nhttpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")\n# httpMethod_deleteratings = 'DELETE'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_getrating",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_getrating = create_resource(apiId, root, \"getrating\")\nhttpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")\n# httpMethod_deleteratings = 'DELETE'\n# integrationHttpMethod_deleteratings = 'DELETE'\n# deleteratings_url = service2 + 'deleteratings'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_getrating",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_getrating = 'GET'\nintegrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")\n# httpMethod_deleteratings = 'DELETE'\n# integrationHttpMethod_deleteratings = 'DELETE'\n# deleteratings_url = service2 + 'deleteratings'\n# # Create methods and integrations",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_getrating",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_getrating = 'GET'\ngetrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")\n# httpMethod_deleteratings = 'DELETE'\n# integrationHttpMethod_deleteratings = 'DELETE'\n# deleteratings_url = service2 + 'deleteratings'\n# # Create methods and integrations\nputMethod(apiId, authorizationType, resourceId_rate, httpMethod_rate)",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "getrating_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "getrating_url = service2 + 'getrating'\n# # Resource for /deleteratings DELETE\n# resourceId_deleteratings = create_resource(\n#     apiId, root, \"deleteratings\")\n# httpMethod_deleteratings = 'DELETE'\n# integrationHttpMethod_deleteratings = 'DELETE'\n# deleteratings_url = service2 + 'deleteratings'\n# # Create methods and integrations\nputMethod(apiId, authorizationType, resourceId_rate, httpMethod_rate)\nputIntegration(apiId, httpMethod_rate, resourceId_rate,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_recomsubmit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_recomsubmit = create_resource(\n    apiId, root, \"recomsubmit\")\nhttpMethod_recomsubmit = 'POST'\nintegrationHttpMethod_recomsubmit = 'POST'\nrecomsubmit_url = service3 + 'recomsubmit'\n# # Resource for /recommends GET\nresourceId_recommends = create_resource(\n    apiId, root, \"recommends\")\nhttpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_recomsubmit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_recomsubmit = 'POST'\nintegrationHttpMethod_recomsubmit = 'POST'\nrecomsubmit_url = service3 + 'recomsubmit'\n# # Resource for /recommends GET\nresourceId_recommends = create_resource(\n    apiId, root, \"recommends\")\nhttpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_recomsubmit",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_recomsubmit = 'POST'\nrecomsubmit_url = service3 + 'recomsubmit'\n# # Resource for /recommends GET\nresourceId_recommends = create_resource(\n    apiId, root, \"recommends\")\nhttpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "recomsubmit_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "recomsubmit_url = service3 + 'recomsubmit'\n# # Resource for /recommends GET\nresourceId_recommends = create_resource(\n    apiId, root, \"recommends\")\nhttpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(\n#     apiId, root, \"deleterecommendations\")",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "resourceId_recommends",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "resourceId_recommends = create_resource(\n    apiId, root, \"recommends\")\nhttpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(\n#     apiId, root, \"deleterecommendations\")\n# httpMethod_deleterecommendations = 'DELETE'\n# integrationHttpMethod_deleterecommendations = 'DELETE'",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "httpMethod_recommends",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "httpMethod_recommends = 'GET'\nintegrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(\n#     apiId, root, \"deleterecommendations\")\n# httpMethod_deleterecommendations = 'DELETE'\n# integrationHttpMethod_deleterecommendations = 'DELETE'\n# deleterecommendations_url = service3 + 'deleterecommendations'\n# # Create methods and integrations",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "integrationHttpMethod_recommends",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "integrationHttpMethod_recommends = 'GET'\nrecommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(\n#     apiId, root, \"deleterecommendations\")\n# httpMethod_deleterecommendations = 'DELETE'\n# integrationHttpMethod_deleterecommendations = 'DELETE'\n# deleterecommendations_url = service3 + 'deleterecommendations'\n# # Create methods and integrations\nputMethod(apiId, authorizationType,",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "recommends_url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "recommends_url = service3 + 'recommends'\n# # Resource for /deleterecommendations DELETE\n# resourceId_deleterecommendations = create_resource(\n#     apiId, root, \"deleterecommendations\")\n# httpMethod_deleterecommendations = 'DELETE'\n# integrationHttpMethod_deleterecommendations = 'DELETE'\n# deleterecommendations_url = service3 + 'deleterecommendations'\n# # Create methods and integrations\nputMethod(apiId, authorizationType,\n          resourceId_recomsubmit, httpMethod_recomsubmit)",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    },
+    {
+        "label": "url",
+        "kind": 5,
+        "importPath": "APIGATEWAY",
+        "description": "APIGATEWAY",
+        "peekOfCode": "url = \"https://\"+apiId+\".execute-api.ap-south-1.amazonaws.com/\"+stageName+'/'\nprint(f\"Deployment endpoint for {stageName} : {url}\")\n# https://ye5o3aa9yf.execute-api.ap-south-1.amazonaws.com/dev/",
+        "detail": "APIGATEWAY",
+        "documentation": {}
+    }
+]
